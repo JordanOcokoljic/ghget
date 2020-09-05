@@ -31,11 +31,14 @@ func main() {
 	username := os.Args[1]
 	repos, err := ghget.ListRepos(username)
 	if err != nil {
-		fmt.Println("An error occured:\n%s\n")
+		fmt.Printf("An error occured listing repositories:\n%s\n", err.Error())
 	}
 
-	err = ghget.GetRepos(repos)
-	if err != nil {
-		fmt.Println("An error occured:\n%s\n")
+	for _, repo := range repos {
+		fmt.Printf("Fetching %s\n", repo.Name)
+		err = ghget.GetRepo(repo.URL)
+		if err != nil {
+			fmt.Printf("Failed to fetch %s\n", repo.Name)
+		}
 	}
 }

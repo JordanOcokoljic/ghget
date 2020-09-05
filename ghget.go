@@ -55,26 +55,12 @@ func ListRepos(username string) ([]Repo, error) {
 	return repos, nil
 }
 
-// getRepo prepares and executes the command to fetch a specific repo.
-func getRepo(url string) error {
+// GetRepo prepares and executes the command to fetch a specific repo.
+func GetRepo(url string) error {
 	cmd := exec.Command("git", "clone", url)
 	err := cmd.Run()
 	if err != nil {
 		return err
-	}
-
-	return nil
-}
-
-// GetRepos will take a slice of repos and run the required commands to fetch
-// all of them.
-func GetRepos(repos []Repo) error {
-	for _, repo := range repos {
-		fmt.Printf("Fetching %s\n", repo.Name)
-		err := getRepo(repo.URL)
-		if err != nil {
-			return err
-		}
 	}
 
 	return nil
