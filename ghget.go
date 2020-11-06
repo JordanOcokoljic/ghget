@@ -50,8 +50,12 @@ func ListRepos(username string) ([]Repo, error) {
 		return nil, err
 	}
 
-	repos := []Repo{}
-	json.Unmarshal(body, &repos)
+	var repos []Repo
+	err = json.Unmarshal(body, &repos)
+	if err != nil {
+		return nil, err
+	}
+
 	return repos, nil
 }
 
