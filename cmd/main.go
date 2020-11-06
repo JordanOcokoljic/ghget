@@ -26,6 +26,7 @@ import (
 func main() {
 	if len(os.Args) != 2 {
 		fmt.Println("usage: ghget <username>")
+		os.Exit(2)
 	}
 
 	username := os.Args[1]
